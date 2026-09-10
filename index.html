@@ -206,20 +206,25 @@
         <h2 class="serif">Connection to BDH &amp; BDH-CQ</h2>
         <p>
           <strong>BDH</strong> (Dragon Hatchling) is Pathway's brain-inspired
-          Post-Transformer architecture. Unlike a standard Transformer, where
-          attention is a dot-product relevance score, BDH reformulates attention
-          as <strong>synaptic memory</strong> that updates as the model reads
-          each token — structurally closer to how biological neural circuits
-          consolidate information.
+          Post-Transformer architecture <a class="cite-inline" href="https://arxiv.org/abs/2509.26507" target="_blank" rel="noopener" title="BDH paper, Sep 2025">[BDH, Sep 2025]</a>.
+          Unlike a standard Transformer, where attention is a dot-product
+          relevance score, BDH reformulates attention as <strong>synaptic memory</strong>
+          that updates as the model reads each token — structurally closer to
+          how biological neural circuits consolidate information.
         </p>
         <p>
-          <strong>BDH-CQ</strong> is a later system in the BDH family that
-          learns from demonstrations and reasons <strong>without a written
-          chain of thought</strong>. It adapts to new tasks by updating
-          recurrent/contextual state at inference time, not by updating
-          weights through gradient descent. Crucially, it requires
-          <strong>no evaluation-task demonstrations during training</strong> —
-          it generalises from demonstration-conditioned inference alone.
+          <strong>BDH-CQ</strong> is a later system in the BDH family
+          <a class="cite-inline" href="https://arxiv.org/abs/2608.09888" target="_blank" rel="noopener" title="BDH-CQ paper, Aug 2026">[BDH-CQ, Aug 2026]</a>
+          that learns from demonstrations and reasons
+          <strong>without a written chain of thought</strong>.
+          It adapts to new tasks by updating recurrent/contextual state at
+          inference time, not by updating weights through gradient descent.
+          Crucially, it requires <strong>no evaluation-task demonstrations
+          during training</strong> — it generalises from
+          demonstration-conditioned inference alone. On ARC-AGI-1, a 150M-parameter
+          configuration reaches 29.5% pass@2 at a cost of ~$0.0007 per task,
+          breaking the previous cost–accuracy Pareto frontier
+          <a class="cite-inline" href="https://arxiv.org/abs/2608.09888" target="_blank" rel="noopener" title="BDH-CQ, Aug 2026">[BDH-CQ, Aug 2026]</a>.
         </p>
 
         <div class="bdhcq-diagram">
@@ -292,13 +297,20 @@
     <div class="container">
       <div class="support-card">
         <h2 class="serif">Research References</h2>
+
+        <h3 class="ref-heading">Background</h3>
         <ul class="ref-list">
-          <li>DataForge 2026 Pathway Track — Challenge specification</li>
-          <li>BDH (Dragon Hatchling): Pathway's Post-Transformer architecture with synaptic-memory attention</li>
-          <li>BDH-CQ: demonstration-conditioned inference without chain-of-thought or gradient-based task adaptation</li>
-          <li>ARC (Abstraction and Reasoning Corpus) — Fran&ccedil;ois Chollet, 2019</li>
-          <li>On the Measure of Intelligence — F. Chollet, 2019</li>
-          <li>Scaling LLM Test-Time Compute — DeepMind, 2024</li>
+          <li><span class="ref-tag">spec</span> DataForge 2026 Pathway Track — Challenge specification</li>
+          <li><span class="ref-tag">2019</span> <a href="https://arxiv.org/abs/1911.01547" target="_blank" rel="noopener">On the Measure of Intelligence</a> &mdash; F. Chollet, 2019 (framework for evaluating generalisation from sparse evidence)</li>
+          <li><span class="ref-tag">2019</span> <a href="https://arxiv.org/abs/1911.01547" target="_blank" rel="noopener">ARC (Abstraction and Reasoning Corpus)</a> &mdash; F. Chollet, 2019 (visual rule-learning benchmark used by BDH-CQ)</li>
+        </ul>
+
+        <h3 class="ref-heading">Recent Evidence (2024 &ndash; 2026)</h3>
+        <ul class="ref-list">
+          <li><span class="ref-tag">Aug 2024</span> <a href="https://arxiv.org/abs/2408.03314" target="_blank" rel="noopener">Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters</a> &mdash; Snell, Lee, Xu &amp; Kumar (Google DeepMind / UC Berkeley)</li>
+          <li><span class="ref-tag">Sep 2025</span> <a href="https://arxiv.org/abs/2509.26507" target="_blank" rel="noopener">BDH (Dragon Hatchling): Pathway Post-Transformer architecture</a> &mdash; Pathway Research (synaptic-memory attention model)</li>
+          <li><span class="ref-tag">Apr 2026</span> <a href="https://arxiv.org/abs/2604.12015" target="_blank" rel="noopener">UCS: Estimating Unseen Coverage for Improved In-Context Learning</a> &mdash; Raina et al. (demonstration coverage as a statistical estimation problem)</li>
+          <li><span class="ref-tag">Aug 2026</span> <a href="https://arxiv.org/abs/2608.09888" target="_blank" rel="noopener">BDH-CQ: Demonstration-conditioned inference without chain-of-thought</a> &mdash; Pathway Research (recurrent latent reasoning, ARC-AGI-1 results)</li>
         </ul>
       </div>
     </div>

@@ -356,6 +356,13 @@ body {
 .takeaway-list, .limitation-list, .ref-list { list-style-position: inside; color: var(--ink-soft); margin-left: 0; }
 .takeaway-list li, .limitation-list li, .ref-list li { margin-bottom: 10px; line-height: 1.6; }
 .takeaway-list strong, .limitation-list strong { color: var(--ink); }
+.ref-list a { color: var(--blue); text-decoration: underline; text-decoration-color: var(--blue-soft); text-underline-offset: 2px; }
+.ref-list a:hover { color: var(--blue-dark); }
+.ref-heading { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin: 18px 0 8px; letter-spacing: 0.02em; }
+.ref-list { margin-bottom: 14px; }
+.ref-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 7px; border-radius: 4px; background: var(--blue-soft); color: var(--blue); margin-right: 5px; vertical-align: middle; }
+.cite-inline { font-size: 0.8rem; font-weight: 500; color: var(--blue); text-decoration: none; border-bottom: 1px dashed var(--blue); padding: 0 2px; margin-left: 3px; }
+.cite-inline:hover { color: var(--blue-dark); border-bottom-style: solid; }
 
 /* ==========================================================================
    FOOTER
