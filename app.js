@@ -452,14 +452,26 @@ function renderCompetingRules(analysis) {
 
 /* ---- Step indicators --------------------------------------------- */
 
-function updateStepBar() {
+const STEP_LABELS = ["Demos", "Learner", "Test", "Explain", "Explore"];
+
+function renderStepper() {
+  const el = $("#stepper");
+  if (!el) return;
   const currentIdx = state.isFreeExplore ? 4 : Math.max(0, Math.min(4, phaseToIndex()));
-  $$(".step-pill").forEach((pill) => {
-    const s = parseInt(pill.dataset.step);
-    pill.classList.remove("active", "done");
-    if (s - 1 < currentIdx) pill.classList.add("done");
-    if (s - 1 === currentIdx) pill.classList.add("active");
+  let html = "";
+  STEP_LABELS.forEach((label, i) => {
+    const cls = i < currentIdx ? "done" : i === currentIdx ? "active" : "";
+    html += `<button class="stepper-item ${cls}" data-step="${i + 1}" aria-current="${i === currentIdx ? "step" : "false"}">
+        <span class="step-dot">${i < currentIdx ? "&#10003;" : i + 1}</span>
+        <span class="step-label">${label}</span>
+      </button>`;
+    if (i < STEP_LABELS.length - 1) html += `<span class="stepper-connector"></span>`;
   });
+  el.innerHTML = html;
+}
+
+function updateStepBar() {
+  renderStepper();
 }
 
 function phaseToIndex() {

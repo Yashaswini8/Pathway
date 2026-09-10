@@ -1,77 +1,81 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Can a Model Learn a Rule From Examples?</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%233b6cb4'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='system-ui'>R</text></svg>" />
+  <title>Coverage Lab — Can a Model Learn a Rule From Examples?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231b5c8c'/><text x='50' y='68' font-size='48' text-anchor='middle' fill='white' font-family='Inter'>C</text></svg>" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- ================================================================== -->
-  <!-- INTRO                                                              -->
-  <!-- ================================================================== -->
+  <!-- ================================================================ -->
+  <!-- INTRO / LANDING                                                 -->
+  <!-- ================================================================ -->
   <header class="intro" id="intro">
-    <div class="container">
-      <span class="intro-badge">Interactive Educational Experiment</span>
-      <h1 class="intro-title">Can a Model Learn a Rule From Examples?</h1>
+    <div class="container intro-inner">
+      <div class="intro-badge">
+        <span class="badge-dot"></span>
+        Interactive Educational Experiment
+      </div>
+      <h1 class="intro-title serif">Coverage Lab</h1>
       <p class="intro-lead">
-        A model can learn a pattern from demonstrations. But what happens
-        when an important part of the rule was never demonstrated?
+        Can a model learn a rule from examples? A model can learn a pattern from
+        demonstrations — but what happens when an important part of the rule was
+        never demonstrated?
       </p>
       <p class="intro-sub">
-        This experiment lets you control which demonstrations a toy learner
-        sees, then watch how missing coverage causes systematic failure on
-        an unseen test case.
+        Control which demonstrations a toy learner sees, then watch how missing
+        coverage causes <strong>systematic failure</strong> on an unseen test case.
       </p>
-      <button class="btn btn-primary btn-lg" id="btn-start">Start Experiment</button>
-      <p class="intro-hint">Takes about 1 minute. No login required.</p>
+      <button class="btn btn-primary btn-lg" id="btn-start">Start Experiment &nbsp;&rarr;</button>
+      <p class="intro-hint">Takes ~1 minute &middot; No login required &middot; Runs in your browser</p>
     </div>
   </header>
 
-  <!-- ================================================================== -->
-  <!-- EXPERIMENT                                                         -->
-  <!-- ================================================================== -->
+  <!-- ================================================================ -->
+  <!-- EXPERIMENT                                                      -->
+  <!-- ================================================================ -->
   <main class="experiment hidden" id="experiment">
 
-    <!-- Step indicator -->
-    <nav class="step-bar" id="step-bar">
-      <div class="container step-bar-inner">
-        <div class="step-pill active" data-step="1">1. Demos</div>
-        <div class="step-pill" data-step="2">2. Learner</div>
-        <div class="step-pill" data-step="3">3. Test</div>
-        <div class="step-pill" data-step="4">4. Explain</div>
-        <div class="step-pill" data-step="5">5. Explore</div>
+    <!-- Stepper header -->
+    <div class="app-header" id="step-bar">
+      <div class="container">
+        <div class="stepper" id="stepper"></div>
       </div>
-    </nav>
+    </div>
 
     <div class="container experiment-body">
 
-      <!-- ==================== SECTION 1: Demonstrations ==================== -->
-      <section class="panel" id="panel-demos">
+      <!-- STEP 1: Demonstrations -->
+      <section class="panel" id="panel-demos" data-panel="1">
         <div class="panel-head">
-          <h2>Input → Output Demonstrations</h2>
+          <div class="panel-step">Step 1</div>
+          <h2>Input &rarr; Output Demonstrations</h2>
           <p class="panel-sub">These are the examples the learner will study. Toggle each one on or off.</p>
         </div>
 
         <div class="task-selector">
-          <span class="label-sm">Task:</span>
+          <span class="label-sm">Select a task:</span>
           <div class="task-tabs" id="task-tabs"></div>
         </div>
 
         <div class="demo-grid" id="demo-grid"></div>
 
         <div class="panel-actions">
-          <button class="btn btn-ghost" id="btn-select-all">Select All</button>
-          <button class="btn btn-ghost" id="btn-deselect-all">Deselect All</button>
-          <button class="btn btn-accent" id="btn-reset-guided">Reset to Guided Demo</button>
+          <button class="btn btn-ghost" id="btn-select-all">Select all</button>
+          <button class="btn btn-ghost" id="btn-deselect-all">Deselect all</button>
+          <button class="btn btn-outline" id="btn-reset-guided">Reset to guided demo</button>
         </div>
       </section>
 
-      <!-- ==================== SECTION 2: Coverage ==================== -->
-      <section class="panel" id="panel-coverage">
+      <!-- STEP 1b: Coverage -->
+      <section class="panel" id="panel-coverage" data-panel="1">
         <div class="panel-head">
+          <div class="panel-step">Step 1</div>
           <h2>Coverage Analysis</h2>
           <p class="panel-sub">Which rule conditions do the selected demonstrations actually establish?</p>
         </div>
@@ -86,31 +90,35 @@
         <div class="coverage-grid" id="coverage-grid"></div>
       </section>
 
-      <!-- ==================== SECTION 3: Learner State ==================== -->
-      <section class="panel" id="panel-learner">
+      <!-- STEP 2: Learner -->
+      <section class="panel" id="panel-learner" data-panel="2">
         <div class="panel-head">
-          <h2>Toy Recurrent Learner State</h2>
+          <div class="panel-step">Step 2</div>
+          <h2>Toy Recurrent Learner</h2>
           <p class="panel-sub">
-            <strong>Educational toy recurrent learner — not BDH-CQ.</strong>
-            Process each demonstration in sequence. Observe the internal state update.
+            <span class="tag">Educational toy recurrent learner — not BDH-CQ</span>
+            Process each demonstration in sequence and observe the internal state update.
           </p>
         </div>
 
         <div class="learner-flow" id="learner-flow"></div>
 
-        <button class="btn btn-primary" id="btn-run-learner">Run Learner on Demos</button>
+        <div class="panel-actions">
+          <button class="btn btn-primary" id="btn-run-learner">Run Learner on Demos</button>
+        </div>
 
         <div class="learner-state-box" id="learner-state-box">
           <h3>Current Memory State</h3>
           <div class="learner-state-content" id="learner-state-content">
-            <p class="muted">Run the learner to see its state.</p>
+            <p class="muted">Run the learner to see its memory state.</p>
           </div>
         </div>
       </section>
 
-      <!-- ==================== SECTION 4: Test & Competing Rules ========== -->
-      <section class="panel" id="panel-test">
+      <!-- STEP 3: Test -->
+      <section class="panel" id="panel-test" data-panel="3">
         <div class="panel-head">
+          <div class="panel-step">Step 3</div>
           <h2>Unseen Test Case &amp; Prediction</h2>
           <p class="panel-sub">The test case is not among the selected demonstrations.</p>
         </div>
@@ -123,28 +131,29 @@
         <div class="test-result" id="test-result">
           <div class="test-card">
             <span class="test-label">Test Input</span>
-            <span class="test-val" id="test-input-val">—</span>
+            <span class="test-val" id="test-input-val">&mdash;</span>
           </div>
           <div class="test-card">
             <span class="test-label">Model Prediction</span>
-            <span class="test-val" id="test-pred-val">—</span>
+            <span class="test-val" id="test-pred-val">&mdash;</span>
           </div>
           <div class="test-card">
             <span class="test-label">Ground Truth</span>
-            <span class="test-val" id="test-gt-val">—</span>
+            <span class="test-val" id="test-gt-val">&mdash;</span>
           </div>
           <div class="test-card test-verdict-card">
             <span class="test-label">Result</span>
-            <span class="test-verdict" id="test-verdict">—</span>
+            <span class="test-verdict" id="test-verdict">&mdash;</span>
           </div>
         </div>
 
         <div class="explanation-box" id="test-explanation"></div>
       </section>
 
-      <!-- ==================== SECTION 5: Competing Rules ================== -->
-      <section class="panel" id="panel-competing">
+      <!-- STEP 4: Competing Rules -->
+      <section class="panel" id="panel-competing" data-panel="4">
         <div class="panel-head">
+          <div class="panel-step">Step 4</div>
           <h2>Competing Rules Analysis</h2>
           <p class="panel-sub">Multiple rules can explain the same limited demonstrations. Which ones fit?</p>
         </div>
@@ -166,37 +175,35 @@
         <div class="competing-explanation" id="competing-explanation"></div>
       </section>
 
-      <!-- ==================== GUIDED PROMPTS ============================== -->
+      <!-- Guided prompt -->
       <div class="guided-prompt" id="guided-prompt">
         <div class="guided-prompt-inner" id="guided-prompt-inner"></div>
       </div>
 
-      <!-- ==================== FREE EXPLORATION ============================ -->
-      <section class="panel panel-free hidden" id="panel-free">
+      <!-- STEP 5: Free exploration -->
+      <section class="panel panel-free hidden" id="panel-free" data-panel="5">
         <div class="panel-head">
+          <div class="panel-step">Step 5</div>
           <h2>Free Exploration</h2>
-          <p class="panel-sub">
-            Try different demonstration sets, test cases, and tasks.
-            Observe how coverage affects prediction.
-          </p>
+          <p class="panel-sub">Try different demonstration sets, test cases, and tasks. Observe how coverage affects prediction.</p>
         </div>
 
         <div class="exploration-controls">
-          <button class="btn btn-ghost" id="btn-explore-reset">Reset Experiment</button>
-          <button class="btn btn-ghost" id="btn-explore-guided">Back to Guided Flow</button>
+          <button class="btn btn-ghost" id="btn-explore-reset">Reset experiment</button>
+          <button class="btn btn-outline" id="btn-explore-guided">Back to guided flow</button>
         </div>
       </section>
 
     </div>
   </main>
 
-  <!-- ================================================================== -->
-  <!-- BDH / BDH-CQ INTEGRATION                                          -->
-  <!-- ================================================================== -->
+  <!-- ================================================================ -->
+  <!-- SUPPORT: BDH / BDH-CQ                                           -->
+  <!-- ================================================================ -->
   <section class="support-section hidden" id="section-bdhcq">
     <div class="container">
       <div class="support-card">
-        <h2>Connection to BDH &amp; BDH-CQ</h2>
+        <h2 class="serif">Connection to BDH &amp; BDH-CQ</h2>
         <p>
           <strong>BDH</strong> (Dragon Hatchling) is Pathway's brain-inspired
           Post-Transformer architecture. Unlike a standard Transformer, where
@@ -237,51 +244,36 @@
         <p class="bdhcq-note">
           Our toy learner is <strong>not</strong> the official BDH or BDH-CQ
           system. It is a simplified educational artifact that illustrates
-          how demonstration coverage limits extrapolation. It does not
-          reproduce BDH's synaptic-memory attention mechanism, BDH-CQ's
-          inference-time adaptation, or their training procedures.
+          how demonstration coverage limits extrapolation.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ================================================================== -->
-  <!-- TAKEAWAYS                                                          -->
-  <!-- ================================================================== -->
+  <!-- ================================================================ -->
+  <!-- SUPPORT: What did you learn                                     -->
+  <!-- ================================================================ -->
   <section class="support-section hidden" id="section-takeaways">
     <div class="container">
       <div class="support-card">
-        <h2>What Did You Learn?</h2>
+        <h2 class="serif">What Did You Learn?</h2>
         <ol class="takeaway-list">
-          <li>
-            <strong>Demonstrations provide evidence</strong> about a hidden rule.
-            They are samples, not the rule itself.
-          </li>
-          <li>
-            <strong>Multiple rules can fit</strong> the same limited set of
-            demonstrations. Ambiguity is the default, not the exception.
-          </li>
-          <li>
-            <strong>Coverage means meaningful rule conditions</strong>, not just
-            more examples. One strategic demonstration can be worth many redundant ones.
-          </li>
-          <li>
-            <strong>Missing coverage causes systematic extrapolation failure</strong>
-            — the model's prediction is wrong in a predictable,
-            explainable way because the evidence was never provided.
-          </li>
+          <li><strong>Demonstrations provide evidence</strong> about a hidden rule. They are samples, not the rule itself.</li>
+          <li><strong>Multiple rules can fit</strong> the same limited set of demonstrations. Ambiguity is the default, not the exception.</li>
+          <li><strong>Coverage means meaningful rule conditions</strong>, not just more examples. One strategic demonstration can be worth many redundant ones.</li>
+          <li><strong>Missing coverage causes systematic extrapolation failure</strong> — the model's prediction is wrong in a predictable, explainable way because the evidence was never provided.</li>
         </ol>
       </div>
     </div>
   </section>
 
-  <!-- ================================================================== -->
-  <!-- LIMITATIONS                                                        -->
-  <!-- ================================================================== -->
+  <!-- ================================================================ -->
+  <!-- SUPPORT: Limitations                                            -->
+  <!-- ================================================================ -->
   <section class="support-section hidden" id="section-limitations">
     <div class="container">
       <div class="support-card">
-        <h2>Limitations</h2>
+        <h2 class="serif">Limitations</h2>
         <ul class="limitation-list">
           <li>The model in this experiment is an <strong>educational toy</strong>, not a real neural network or language model.</li>
           <li>The experiment isolates a <strong>specific controlled phenomenon</strong> — it does not demonstrate universal behavior.</li>
@@ -293,18 +285,18 @@
     </div>
   </section>
 
-  <!-- ================================================================== -->
-  <!-- REFERENCES                                                         -->
-  <!-- ================================================================== -->
+  <!-- ================================================================ -->
+  <!-- SUPPORT: References                                             -->
+  <!-- ================================================================ -->
   <section class="support-section hidden" id="section-references">
     <div class="container">
       <div class="support-card">
-        <h2>Research References</h2>
+        <h2 class="serif">Research References</h2>
         <ul class="ref-list">
           <li>DataForge 2026 Pathway Track — Challenge specification</li>
           <li>BDH (Dragon Hatchling): Pathway's Post-Transformer architecture with synaptic-memory attention</li>
           <li>BDH-CQ: demonstration-conditioned inference without chain-of-thought or gradient-based task adaptation</li>
-          <li>ARC (Abstraction and Reasoning Corpus) — François Chollet, 2019</li>
+          <li>ARC (Abstraction and Reasoning Corpus) — Fran&ccedil;ois Chollet, 2019</li>
           <li>On the Measure of Intelligence — F. Chollet, 2019</li>
           <li>Scaling LLM Test-Time Compute — DeepMind, 2024</li>
         </ul>
@@ -312,16 +304,13 @@
     </div>
   </section>
 
-  <!-- ================================================================== -->
-  <!-- CREDITS                                                            -->
-  <!-- ================================================================== -->
+  <!-- ================================================================ -->
+  <!-- FOOTER / CREDITS                                                -->
+  <!-- ================================================================ -->
   <footer class="site-footer hidden" id="section-credits">
     <div class="container">
       <p class="footer-line">DataForge 2026 Pathway Track — Demonstration Coverage &amp; Extrapolation</p>
-      <p class="footer-line footer-small">
-        Educational interactive experiment. All computation runs locally in your browser.
-        No API keys, accounts, or external services required.
-      </p>
+      <p class="footer-line footer-small">Educational interactive experiment. All computation runs locally in your browser. No API keys, accounts, or external services required.</p>
     </div>
   </footer>
 
