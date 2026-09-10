@@ -367,7 +367,7 @@ function renderTestInputs() {
     `<button class="test-input-btn ${n === state.testInput ? "active" : ""}" data-val="${n}">${n}</button>`
   ).join("");
   grp.querySelectorAll(".test-input-btn").forEach((btn) => {
-    btn.addEventListener("click", () => { state.testInput = parseInt(btn.dataset.value); renderTestInputs(); runTest(); });
+    btn.addEventListener("click", () => { state.testInput = parseInt(btn.dataset.val); renderTestInputs(); runTest(); });
   });
 }
 
