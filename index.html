@@ -191,22 +191,34 @@
   </main>
 
   <!-- ================================================================== -->
-  <!-- BDH-CQ INTEGRATION                                                 -->
+  <!-- BDH / BDH-CQ INTEGRATION                                          -->
   <!-- ================================================================== -->
   <section class="support-section hidden" id="section-bdhcq">
     <div class="container">
       <div class="support-card">
-        <h2>Connection to BDH-CQ</h2>
+        <h2>Connection to BDH &amp; BDH-CQ</h2>
         <p>
-          <strong>BDH-CQ</strong> (Behavioral Domain Hypothesis - Continuous Quality)
-          is a real research system that learns from demonstrations using recurrent
-          or contextual memory and applies that information to unfamiliar ARC-style tasks.
+          <strong>BDH</strong> (Dragon Hatchling) is Pathway's brain-inspired
+          Post-Transformer architecture. Unlike a standard Transformer, where
+          attention is a dot-product relevance score, BDH reformulates attention
+          as <strong>synaptic memory</strong> that updates as the model reads
+          each token — structurally closer to how biological neural circuits
+          consolidate information.
+        </p>
+        <p>
+          <strong>BDH-CQ</strong> is a later system in the BDH family that
+          learns from demonstrations and reasons <strong>without a written
+          chain of thought</strong>. It adapts to new tasks by updating
+          recurrent/contextual state at inference time, not by updating
+          weights through gradient descent. Crucially, it requires
+          <strong>no evaluation-task demonstrations during training</strong> —
+          it generalises from demonstration-conditioned inference alone.
         </p>
 
         <div class="bdhcq-diagram">
           <div class="diagram-node">Demonstrations</div>
           <div class="diagram-arrow">&darr;</div>
-          <div class="diagram-node diagram-node-mem">Contextual / Recurrent Memory</div>
+          <div class="diagram-node diagram-node-mem">BDH Synaptic Memory<br/>(recurrent / contextual state)</div>
           <div class="diagram-arrow">&darr;</div>
           <div class="diagram-node">New Task</div>
           <div class="diagram-arrow">&darr;</div>
@@ -214,16 +226,20 @@
         </div>
 
         <p>
-          This toy experiment isolates one educational lesson: <em>recurrent or
-          contextual memory can process demonstrations, but the demonstrations
-          still need to provide enough information to distinguish the intended rule
-          from competing rules.</em>
+          This toy experiment isolates one educational lesson: <em>recurrent
+          memory can process demonstrations, but the demonstrations still need
+          to provide enough information to distinguish the intended rule from
+          competing rules.</em> A real BDH-CQ system faces the same
+          coverage constraint — demonstration-conditioned inference only
+          helps when the demonstrations actually establish the relevant
+          rule conditions.
         </p>
         <p class="bdhcq-note">
-          Our toy learner is <strong>not</strong> the official BDH-CQ system.
-          It is a simplified educational artifact inspired by the problem of
-          learning from demonstrations. It does not reproduce BDH-CQ's
-          architecture, training procedure, or internal behavior.
+          Our toy learner is <strong>not</strong> the official BDH or BDH-CQ
+          system. It is a simplified educational artifact that illustrates
+          how demonstration coverage limits extrapolation. It does not
+          reproduce BDH's synaptic-memory attention mechanism, BDH-CQ's
+          inference-time adaptation, or their training procedures.
         </p>
       </div>
     </div>
@@ -286,7 +302,8 @@
         <h2>Research References</h2>
         <ul class="ref-list">
           <li>DataForge 2026 Pathway Track — Challenge specification</li>
-          <li>BDH-CQ: Behavioral Domain Hypothesis — Continuous Quality research project</li>
+          <li>BDH (Dragon Hatchling): Pathway's Post-Transformer architecture with synaptic-memory attention</li>
+          <li>BDH-CQ: demonstration-conditioned inference without chain-of-thought or gradient-based task adaptation</li>
           <li>ARC (Abstraction and Reasoning Corpus) — François Chollet, 2019</li>
           <li>On the Measure of Intelligence — F. Chollet, 2019</li>
           <li>Scaling LLM Test-Time Compute — DeepMind, 2024</li>
